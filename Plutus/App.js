@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
+import Login from './screens/Landing Page/loginScreen'
 export default function App() {
   return (
     <View style={styles.container}>
       
-      <Text>Open up App.js to start apple on your app!</Text>
+      <Login></Login>
       
       <StatusBar style="auto" />
     </View>
