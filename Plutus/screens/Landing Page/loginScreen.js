@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = ({navigation}) => {
+  const handleLogin = () => {
     // Add api implementation for login here
+    console.log("hi)");
     console.log('Email:', email);
     console.log('Password:', password);
-    navigation.navigate('Home');
+    
   };
 
   return (
@@ -28,7 +29,7 @@ const Login = () => {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-      <TouchableOpacity style={styles.button} backgroundColor={"#DDDDDD"} flex={1} onPress={handleLogin}><Text style={styles.loginText}>Login</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.button} backgroundColor={"#DDDDDD"} flex={1} onPress={() => {navigation.navigate('Home')} }><Text style={styles.loginText}>Login</Text></TouchableOpacity>
     </View>
   );
 };
