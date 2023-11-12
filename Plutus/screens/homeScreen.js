@@ -1,8 +1,10 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Modal, TouchableHighlight } from 'react-native';
 
 // HomeScreen component
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to Your Budget App</Text>
@@ -15,6 +17,38 @@ export const HomeScreen = () => {
 
       {/* Monthly Budget Component */}
       <BudgetComponent title="Monthly Budget" amount="$1000" />
+
+      {/* Circle Button in the Top Right Corner */}
+      <TouchableOpacity
+        style={styles.circleButton}
+        onPress={() => setModalVisible(!modalVisible)}
+      >
+        <Text style={styles.buttonText}>+</Text>
+      </TouchableOpacity>
+
+      {/* Modal for Options */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.modalView}>
+          <TouchableHighlight
+            style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('AddIncome');
+            }}
+          >
+            <Text style={styles.textStyle}>Add New Income Data</Text>
+          </TouchableHighlight>
+
+          {/* Add other options similarly */}
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -55,4 +89,52 @@ const styles = StyleSheet.create({
   budgetAmount: {
     fontSize: 16,
   },
+  // Circle Button
+  circleButton: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    backgroundColor: '#000103',
+    borderRadius: 50,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+
+  // Modal Styles
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginVertical: 8,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
+
+export default HomeScreen;
