@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 
 // HomeScreen component
 export const HomeScreen = ({ navigation }) => {
@@ -37,7 +37,7 @@ export const HomeScreen = ({ navigation }) => {
       >
         <View style={styles.modalView}>
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
+            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('AddIncome');
@@ -47,7 +47,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#4CAF50' }}
+            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('AddBudgetCategory');
@@ -57,7 +57,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#FFC107' }}
+            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('UpdateProfile');
@@ -67,13 +67,23 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#FF5722' }}
+            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('Settings');
             }}
           >
             <Text style={styles.textStyle}>Settings</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('AddExpense');
+            }}
+          >
+            <Text style={styles.textStyle}>Add New Expense Data</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -91,32 +101,8 @@ const BudgetComponent = ({ title, amount }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  welcomeText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  budgetContainer: {
-    marginTop: 16,
-    padding: 16,
-    backgroundColor: '#e0e0e0',
-    borderRadius: 8,
-    width: '100%',
-  },
-  budgetTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  budgetAmount: {
-    fontSize: 16,
-  },
+  // ... (remaining styles)
+
   // Circle Button
   circleButton: {
     position: 'absolute',
@@ -154,7 +140,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#C8FACD',
     borderRadius: 8,
     padding: 10,
     marginBottom: 8,
