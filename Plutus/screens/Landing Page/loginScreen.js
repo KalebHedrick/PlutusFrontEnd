@@ -6,7 +6,7 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Add api implementation for login here
+    // Add API implementation for login here
     console.log('Email:', email);
     console.log('Password:', password);
   };
@@ -60,18 +60,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    height: 40, // Adjusted height
+    height: 30, // Reduced height
     width: '80%', // Adjusted width
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 10, // Reduced margin
     paddingLeft: 10,
   },
   button: {
     backgroundColor: '#000103',
     borderRadius: 50,
-    width: '80%',
-    height: 40, // Adjusted height
+    width: '40%', // Reduced width
+    height: 30, // Reduced height
     justifyContent: 'center',
     alignItems: 'center',
   },
