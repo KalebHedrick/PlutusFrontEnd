@@ -38,6 +38,11 @@ const Login = ({ navigation }) => {
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
+
+      {/* Bottom message */}
+      <Text style={styles.bottomMessage}>
+        Kudos to you for making a big step toward a strong financial future! 👏
+      </Text>
     </View>
   );
 };
@@ -78,7 +83,11 @@ const styles = StyleSheet.create({
   loginText: {
     color: '#FFFFFF',
   },
+  bottomMessage: {
+    marginTop: 20,
+    fontSize: 14,
+    textAlign: 'center',
+  },
 });
 
 export default Login;
-
