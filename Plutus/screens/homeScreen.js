@@ -36,7 +36,7 @@ export const HomeScreen = ({ navigation }) => {
         }}
       >
         <View style={styles.modalView}>
-          <TouchableHighlight
+          <TouchableOpacity
             style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
             onPress={() => {
               setModalVisible(!modalVisible);
@@ -44,9 +44,37 @@ export const HomeScreen = ({ navigation }) => {
             }}
           >
             <Text style={styles.textStyle}>Add New Income Data</Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
-          {/* Add other options similarly */}
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#4CAF50' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('AddBudgetCategory');
+            }}
+          >
+            <Text style={styles.textStyle}>Add New Budget Category</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#FFC107' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('UpdateProfile');
+            }}
+          >
+            <Text style={styles.textStyle}>Update Profile Information</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#FF5722' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('Settings');
+            }}
+          >
+            <Text style={styles.textStyle}>Settings</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </View>
@@ -109,11 +137,13 @@ const styles = StyleSheet.create({
 
   // Modal Styles
   modalView: {
-    margin: 20,
+    position: 'absolute',
+    top: 0,
+    right: 0,
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
+    width: '25%',
+    height: '100%',
+    padding: 16,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -125,10 +155,10 @@ const styles = StyleSheet.create({
   },
   openButton: {
     backgroundColor: '#F194FF',
-    borderRadius: 20,
+    borderRadius: 8,
     padding: 10,
+    marginBottom: 8,
     elevation: 2,
-    marginVertical: 8,
   },
   textStyle: {
     color: 'white',
