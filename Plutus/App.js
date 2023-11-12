@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/Landing Page/loginScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';783
+import { NavigationContainer } from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
