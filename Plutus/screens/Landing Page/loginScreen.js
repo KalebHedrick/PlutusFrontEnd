@@ -5,10 +5,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = ({navigation}) => {
     // Add api implementation for login here
     console.log('Email:', email);
     console.log('Password:', password);
+    navigation.navigate('Home');
   };
 
   return (

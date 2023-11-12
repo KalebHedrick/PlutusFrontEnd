@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 // HomeScreen component
 export const HomeScreen = () => {
@@ -28,3 +27,32 @@ const BudgetComponent = ({ title, amount }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  welcomeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  budgetContainer: {
+    marginTop: 16,
+    padding: 16,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 8,
+    width: '100%',
+  },
+  budgetTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  budgetAmount: {
+    fontSize: 16,
+  },
+});

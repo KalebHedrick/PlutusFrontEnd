@@ -1,22 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/Landing Page/loginScreen'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-const Tab = createBottomTabNavigator();
+import { HomeScreen } from './screens/homeScreen';
+const Tab = createNativeStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
+    
       
       <NavigationContainer>
-      <Tab.Navigator>
+        
+      <Tab.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Login" component={Login} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
       </Tab.Navigator>
     </NavigationContainer>
       
-      <StatusBar style="auto" />
-    </View>
+      
   );
 }
 
