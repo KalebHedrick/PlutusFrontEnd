@@ -138,55 +138,61 @@ const styles = StyleSheet.create({
   budgetAmount: {
     fontSize: 16,
   },
-  // Modal Styles
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+
+// Modal Styles
+modalOverlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0,0,0,0.5)',
+},
+modalView: {
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  backgroundColor: 'white',
+  width: '25%',
+  height: '100%',
+  padding: 16,
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2,
   },
-  modalView: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    backgroundColor: 'white',
-    width: '25%',
-    height: '100%',
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  openButton: {
-    backgroundColor: '#C8FACD',
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 8,
-    elevation: 2,
-  },
-  textStyle: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  // Circle Button Styles
-  circleButton: {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-    backgroundColor: '#C8FACD',
-    borderRadius: 50,
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 24,
-  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5,
+  zIndex: 1, // Add zIndex to make sure the modal is above the other components
+},
+openButton: {
+  backgroundColor: '#C8FACD',
+  borderRadius: 8,
+  padding: 10,
+  marginBottom: 8,
+  elevation: 2,
+  zIndex: 2, // Add zIndex to make sure the button is above the modal
+},
+textStyle: {
+  color: 'black',
+  fontWeight: 'bold',
+  textAlign: 'center',
+},
+// Circle Button Styles
+circleButton: {
+  position: 'absolute',
+  bottom: 16,
+  right: 16,
+  backgroundColor: '#C8FACD',
+  borderRadius: 50,
+  width: 40,
+  height: 40,
+  justifyContent: 'center',
+  alignItems: 'center',
+  elevation: 2,
+  zIndex: 2, // Add zIndex to make sure the button is above the modal
+},
+buttonText: {
+  color: 'black',
+  fontSize: 24,
+},
 });
+
+
