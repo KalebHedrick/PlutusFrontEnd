@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Modal,
-  TouchableOpacity,
-  TouchableHighlight,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Modal, TouchableHighlight } from 'react-native';
 
+// HomeScreen component
 export const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -24,7 +18,15 @@ export const HomeScreen = ({ navigation }) => {
       {/* Monthly Budget Component */}
       <BudgetComponent title="Monthly Budget" amount="$1000" />
 
-      {/* Modal */}
+      {/* Circle Button in the Top Right Corner */}
+      <TouchableOpacity
+        style={styles.circleButton}
+        onPress={() => setModalVisible(!modalVisible)}
+      >
+        <Text style={styles.buttonText}>+</Text>
+      </TouchableOpacity>
+
+      {/* Modal for Options */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -33,71 +35,48 @@ export const HomeScreen = ({ navigation }) => {
           setModalVisible(!modalVisible);
         }}
       >
-        <TouchableHighlight
-          style={styles.modalOverlay}
-          onPress={() => setModalVisible(!modalVisible)}
-        >
-          <View style={styles.modalView}>
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate('AddIncome');
-              }}
-            >
-              <Text style={styles.textStyle}>Add New Income Data</Text>
-            </TouchableOpacity>
+        <View style={styles.modalView}>
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('AddIncome');
+            }}
+          >
+            <Text style={styles.textStyle}>Add New Income Data</Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate('AddBudgetCategory');
-              }}
-            >
-              <Text style={styles.textStyle}>Add New Budget Category</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#4CAF50' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('AddBudgetCategory');
+            }}
+          >
+            <Text style={styles.textStyle}>Add New Budget Category</Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate('UpdateProfile');
-              }}
-            >
-              <Text style={styles.textStyle}>Update Profile Information</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#FFC107' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('UpdateProfile');
+            }}
+          >
+            <Text style={styles.textStyle}>Update Profile Information</Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate('Settings');
-              }}
-            >
-              <Text style={styles.textStyle}>Settings</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-                navigation.navigate('AddExpense');
-              }}
-            >
-              <Text style={styles.textStyle}>Add New Expense Data</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableHighlight>
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#FF5722' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('Settings');
+            }}
+          >
+            <Text style={styles.textStyle}>Settings</Text>
+          </TouchableOpacity>
+        </View>
       </Modal>
-
-      {/* Circle Button */}
-      <TouchableOpacity
-        style={styles.circleButton}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.buttonText}>+</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -138,61 +117,54 @@ const styles = StyleSheet.create({
   budgetAmount: {
     fontSize: 16,
   },
-
-// Modal Styles
-modalOverlay: {
-  flex: 1,
-  backgroundColor: 'rgba(0,0,0,0.5)',
-},
-modalView: {
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  backgroundColor: 'white',
-  width: '25%',
-  height: '100%',
-  padding: 16,
-  shadowColor: '#000',
-  shadowOffset: {
-    width: 0,
-    height: 2,
+  // Circle Button
+  circleButton: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    backgroundColor: '#000103',
+    borderRadius: 50,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
   },
-  shadowOpacity: 0.25,
-  shadowRadius: 4,
-  elevation: 5,
-  zIndex: 1, // Add zIndex to make sure the modal is above the other components
-},
-openButton: {
-  backgroundColor: '#C8FACD',
-  borderRadius: 8,
-  padding: 10,
-  marginBottom: 8,
-  elevation: 2,
-  zIndex: 2, // Add zIndex to make sure the button is above the modal
-},
-textStyle: {
-  color: 'black',
-  fontWeight: 'bold',
-  textAlign: 'center',
-},
-// Circle Button Styles
-circleButton: {
-  position: 'absolute',
-  bottom: 16,
-  right: 16,
-  backgroundColor: '#C8FACD',
-  borderRadius: 50,
-  width: 40,
-  height: 40,
-  justifyContent: 'center',
-  alignItems: 'center',
-  elevation: 2,
-  zIndex: 2, // Add zIndex to make sure the button is above the modal
-},
-buttonText: {
-  color: 'black',
-  fontSize: 24,
-},
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+
+  // Modal Styles
+  modalView: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: 'white',
+    width: '25%',
+    height: '100%',
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 8,
+    elevation: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
 
-
+export default HomeScreen;
