@@ -39,6 +39,20 @@ const Login = ({ navigation }) => {
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
+        {/* Space between login and create user button */ }
+        <View style = {{ marginVertical: 5 }} />
+
+      {/* Create button for new user */ }  
+      <TouchableOpacity
+        style = {styles.button}
+        background={'#C8FACD'}
+        onPress = {() => {
+          navigation.navigate('New User'); 
+        }}
+        >
+          <Text style ={styles.loginText}>New User</Text>
+        </TouchableOpacity>
+
       {/* Bottom message */}
       <Text style={styles.bottomMessage}>
         Kudos to you for making a big step toward a strong financial future! 👏
