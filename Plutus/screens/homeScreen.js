@@ -37,7 +37,7 @@ export const HomeScreen = ({ navigation }) => {
       >
         <View style={styles.modalView}>
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('AddIncome');
@@ -47,7 +47,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('AddBudgetCategory');
@@ -57,7 +57,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('UpdateProfile');
@@ -67,7 +67,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('Settings');
@@ -77,7 +77,7 @@ export const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#C8FACD' }}
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
               navigation.navigate('AddExpense');
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: '#C8FACD',
+    backgroundColor: '#000103',
     borderRadius: 8,
     padding: 10,
     marginBottom: 8,
