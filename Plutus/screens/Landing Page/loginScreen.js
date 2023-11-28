@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
+const LoginUrl = "http://3.17.169.64:3000/auth/login"
+
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Add API implementation for login here
+//post for login info
     console.log('Email:', email);
     console.log('Password:', password);
+
+    fetch(LoginUrl, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: email,
+    password: password,
+  }),
+}).then(response => response.json())
+    .then(json => {
+      console.log(json);          
+    })
+    .catch(error => {
+      console.error(error);
+    });
   };
 
   return (
@@ -33,6 +53,7 @@ const Login = ({ navigation }) => {
         style={styles.button}
         backgroundColor={'#C8FACD'} // Lighter green color
         onPress={() => {
+          handleLogin();
           navigation.navigate('Home');
         }}
       >
