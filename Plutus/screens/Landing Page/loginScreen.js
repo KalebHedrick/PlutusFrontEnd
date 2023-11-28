@@ -6,7 +6,7 @@ const LoginUrl = "http://3.17.169.64:3000/auth/login"
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [successText, setSuccessText] = useState("Please enter your login information below:") //this changes if the user doesnt exist
   const handleLogin = () => {
 //post for login info
     console.log('Email:', email);
@@ -24,7 +24,13 @@ const Login = ({ navigation }) => {
   }),
 }).then(response => response.json())
     .then(json => {
-      console.log(json);          
+      console.log(json);
+      if (json.status == "auth_success") {
+        navigation.navigate('Home');
+      }       
+      else {
+        setSuccessText("INVALID USER< PLEASE REENTER CREDENTIALS")
+      } 
     })
     .catch(error => {
       console.error(error);
@@ -34,7 +40,7 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Plutus</Text>
-      <Text style={styles.subtitle}>Please enter your login information below:</Text>
+      <Text style={styles.subtitle}>{successText}</Text>
 
       <TextInput
         style={styles.input}
@@ -54,7 +60,7 @@ const Login = ({ navigation }) => {
         backgroundColor={'#C8FACD'} // Lighter green color
         onPress={() => {
           handleLogin();
-          navigation.navigate('Home');
+          
         }}
       >
         <Text style={styles.loginText}>Login</Text>
