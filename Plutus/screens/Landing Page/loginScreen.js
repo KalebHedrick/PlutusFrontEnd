@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
         navigation.navigate('Home');
       }       
       else {
-        setSuccessText("INVALID USER< PLEASE REENTER CREDENTIALS")
+        setSuccessText("💥💥INVALID USER PLEASE REENTER CREDENTIALS💥💥");
       } 
     })
     .catch(error => {
