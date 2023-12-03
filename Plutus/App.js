@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from './screens/homeScreen';
 import { NewUser } from './screens/Account Creation/newUser';
+import ExpenseScreen from './screens/expenseScreen';
 const Tab = createNativeStackNavigator();
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Tab.Screen name="Login" component={Login} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name ="New User" component={NewUser} />
+        <Tab.Screen name = "Add Expense" component={ExpenseScreen} /> 
       </Tab.Navigator>
     </NavigationContainer>
       

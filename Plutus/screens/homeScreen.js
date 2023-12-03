@@ -50,6 +50,16 @@ export const HomeScreen = ({ navigation }) => {
             style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
+              navigation.navigate('ExpenseScreen');
+            }}
+          >
+            <Text style={styles.textStyle}>Add New Expense Data</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
               navigation.navigate('AddBudgetCategory');
             }}
           >
@@ -74,16 +84,6 @@ export const HomeScreen = ({ navigation }) => {
             }}
           >
             <Text style={styles.textStyle}>Settings</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#000103' }}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-              navigation.navigate('AddExpense');
-            }}
-          >
-            <Text style={styles.textStyle}>Add New Expense Data</Text>
           </TouchableOpacity>
         </View>
       </Modal>
