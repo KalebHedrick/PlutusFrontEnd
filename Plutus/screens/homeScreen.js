@@ -50,7 +50,7 @@ export const HomeScreen = ({ navigation }) => {
             style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
-              navigation.navigate('ExpenseScreen');
+              navigation.navigate('Add Expense');
             }}
           >
             <Text style={styles.textStyle}>Add New Expense Data</Text>
@@ -59,7 +59,6 @@ export const HomeScreen = ({ navigation }) => {
           <TouchableOpacity
             style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
-              setModalVisible(!modalVisible);
               navigation.navigate('AddBudgetCategory');
             }}
           >
