@@ -34,7 +34,20 @@ const ExpenseScreen = ({ navigation }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(expenseData),
+      body: JSON.stringify(expenseData),
     })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        // Handle the response from the backend
+        if (json.status === 'expense_add_success') {
+          // Expense added successfully, you can update the UI or navigate to another screen
+          // For example, you might want to navigate to a screen that shows the added expense
+          navigation.navigate('ExpenseDetails', { expenseId: json.id });
+        } else {
+          // Handle other response statuses or show an error message to the user
+          alert(`Failed to add expense. Error: ${json.message}`);
+        }
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -100,6 +113,24 @@ const ExpenseScreen = ({ navigation }) => {
             onChangeText={(text) => setExpenseDate(text)}
           />
           <TouchableOpacity style={styles.addButton} onPress={handleAddExpense}>
+            placeholder="Expense Name"
+            value={expenseName}
+            onChangeText={(text) => setExpenseName(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Expense Amount"
+            value={expenseAmount}
+            onChangeText={(text) => setExpenseAmount(text)}
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Expense Date (YYYY-MM-DD)"
+            value={expenseDate}
+            onChangeText={(text) => setExpenseDate(text)}
+          />
+          <TouchableOpacity style={styles.addButton} onPress={handleAddExpense}>
             <Text style={styles.addButtonText}>Add Expense</Text>
           </TouchableOpacity>
         </View>
@@ -116,6 +147,67 @@ const ExpenseScreen = ({ navigation }) => {
 };
  
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  topBar: {
+    flex: 1,
+    backgroundColor: '#000103',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewExpensesText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+  },
+  leftSection: {
+    flex: 1,
+    backgroundColor: '#69DC9E',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryBox: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    padding: 10,
+    margin: 5,
+  },
+  categoryText: {
+    color: '#000103',
+    fontSize: 16,
+  },
+  rightSection: {
+    flex: 2,
+    padding: 20,
+  },
+  inputSection: {
+    marginBottom: 20,
+  },
+  inputTitle: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
+  },
+  addButton: {
+    backgroundColor: '#000103',
+    borderRadius: 10,
+    padding: 10,
+    alignItems: 'center',
+  },
+  addButtonText: {
+    color: '#FFFFFF',
+  },
+  editSection: {
+    // Placeholder for the edit section
+    // Add your styling as needed
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
