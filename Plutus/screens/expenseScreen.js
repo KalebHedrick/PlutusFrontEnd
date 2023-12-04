@@ -6,8 +6,7 @@ const ExpenseScreen = ({ navigation }) => {
   const [expenseAmount, setExpenseAmount] = useState('');
   const [expenseDate, setExpenseDate] = useState('');
 
-  const handleAddExpense = () => {/*
-    change to see if the committing works
+  const handleAddExpense = () => {
     // Add logic to handle adding expense
     // You can use the values of expenseName, expenseAmount, and expenseDate
 
@@ -52,7 +51,7 @@ const ExpenseScreen = ({ navigation }) => {
         // Handle error, show an alert to the user
         alert('An unexpected error occurred. Please try again later.');
       });
-    */};
+    };
 
   return (
     <View style={styles.container}>
