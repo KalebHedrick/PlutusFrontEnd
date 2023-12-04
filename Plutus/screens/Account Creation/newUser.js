@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 const LoginUrl = "http://3.17.169.64:3000/auth/create"
 {/* Account Creation Component */ } 
 export const NewUser = ({ navigation }) => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState(''); 
@@ -86,7 +87,7 @@ export const NewUser = ({ navigation }) => {
       />
       <TouchableOpacity
         style={styles.button}
-        Texr={'#C8FACD'} // Lighter green color
+        backgroundColor={'#C8FACD'} // Lighter green color
         onPress={() => {
           createuser();
           
