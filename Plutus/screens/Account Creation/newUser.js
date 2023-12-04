@@ -1,13 +1,40 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
+const LoginUrl = "http://3.17.169.64:3000/auth/create"
 {/* Account Creation Component */ } 
 export const NewUser = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLastName] = useState('');
-    
+    const [errorText, setErrorText] = useState(<></>);
+    function createuser() {
+      fetch(LoginUrl, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: email,
+    password: password,
+    firstName: firstName,
+    lastName: lastName
+  }),
+}).then(response => response.json())
+    .then(json => {
+      console.log(json);
+      if (json.status == "create_account_success") {
+        navigation.navigate('Login');
+      }       
+      else {
+      setErrorText("Email is already in use, please reenter a new email")
+      } 
+    })
+    .catch(error => {
+      console.error(error);
+    });
+    }
     return(
     <View style = {styles.container}>
         
@@ -25,8 +52,11 @@ export const NewUser = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.linkText}>Click here</Text>
         </TouchableOpacity>
+        
       </View>
-
+      <View style={{minHeight: "4%"}}>
+      <Text style={styles.errtext}>{errorText}</Text>
+      </View>
       <TextInput
         style= {styles.input}
         placeholder="First Name"
@@ -58,7 +88,7 @@ export const NewUser = ({ navigation }) => {
         style={styles.button}
         Texr={'#C8FACD'} // Lighter green color
         onPress={() => {
-          navigation.navigate('Home')
+          createuser();
           
         }}
     >
@@ -115,6 +145,10 @@ const styles = StyleSheet.create({
       newUserText: {
         color:'#FFFFFF',
       },
+      errtext: {
+        fontSize: 20,
+        fontWeight: 'bold',
+      }
 });
   
 export default NewUser; 
