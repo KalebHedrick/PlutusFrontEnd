@@ -22,7 +22,7 @@ export const NewUser = ({ navigation }) => {
         {/* Link Back to Home Page */}
         <View style={styles.subtitleContainer}>
         <Text style={styles.subtitle}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.linkText}>Click here</Text>
         </TouchableOpacity>
       </View>
