@@ -6,10 +6,52 @@ const ExpenseScreen = ({ navigation }) => {
   const [expenseAmount, setExpenseAmount] = useState('');
   const [expenseDate, setExpenseDate] = useState('');
 
-  const handleAddExpense = () => {
+  const handleAddExpense = () => {/*
     // Add logic to handle adding expense
     // You can use the values of expenseName, expenseAmount, and expenseDate
-  };
+
+    // Check if any of the required fields are empty
+    if (!expenseName || !expenseAmount || !expenseDate) {
+      // Handle error, show an alert to the user
+      alert('Please fill in all the fields.');
+      return;
+    }
+
+    const expenseData = {
+      email: 'user@example.com', // You may get this dynamically based on the logged-in user
+      amount: parseFloat(expenseAmount), // Convert the amount to a float
+      expenseDate: expenseDate,
+      // You can add other fields based on your backend API requirements
+    };
+
+    // Make a POST request to the backend API
+    fetch('http://3.17.169.64:3000/expenses/add', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(expenseData),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        // Handle the response from the backend
+        if (json.status === 'expense_add_success') {
+          // Expense added successfully, you can update the UI or navigate to another screen
+          // For example, you might want to navigate to a screen that shows the added expense
+          navigation.navigate('ExpenseDetails', { expenseId: json.id });
+        } else {
+          // Handle other response statuses or show an error message to the user
+          alert(`Failed to add expense. Error: ${json.message}`);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle error, show an alert to the user
+        alert('An unexpected error occurred. Please try again later.');
+      });
+    */};
 
   return (
     <View style={styles.container}>
@@ -60,7 +102,7 @@ const ExpenseScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Edit Expense Section (You can replace this with your logic) */}
+        {/* Edit Expense Section */}
         {/* This is just a placeholder for the edit section */}
         <View style={styles.editSection}>
           <Text style={styles.inputTitle}>Edit Expenses</Text>
