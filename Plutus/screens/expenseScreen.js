@@ -18,10 +18,10 @@ const ExpenseScreen = ({ navigation }) => {
     }
  
     const expenseData = {
-      email: 'planwithplutus@gmail.com', // You may get this dynamically based on the logged-in user
-      amount: parseFloat(expenseAmount), // Convert the amount to a float
+      email: 'planwithplutus@gmail.com', 
+      amount: parseFloat(expenseAmount), 
       currency: 'usd',
-      method: 'credit_card',
+      method: 'credit_card', //can be credit_card or debit_card
       expenseDate: expenseDate,
       // You can add other fields based on your backend API requirements
     };
@@ -34,27 +34,12 @@ const ExpenseScreen = ({ navigation }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(expenseData),
-      body: JSON.stringify(expenseData),
     })
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
         // Handle the response from the backend
         if (json.status === 'expense_add_success') {
-          // Expense added successfully, you can update the UI or navigate to another screen
-          // For example, you might want to navigate to a screen that shows the added expense
-          navigation.navigate('ExpenseDetails', { expenseId: json.id });
-        } else {
-          // Handle other response statuses or show an error message to the user
-          alert(`Failed to add expense. Error: ${json.message}`);
-        }
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        // Handle the response from the backend
-        if (json.status === 'expense_add_success') {
-          // Expense added successfully, you can update the UI or navigate to another screen
-          // For example, you might want to navigate to a screen that shows the added expense
           navigation.navigate('ExpenseDetails', { expenseId: json.id });
         } else {
           // Handle other response statuses or show an error message to the user
@@ -63,7 +48,7 @@ const ExpenseScreen = ({ navigation }) => {
       })
       .catch((error) => {
         console.error(error);
-        // Handle error, show an alert to the user
+        // Handle error, show alert to the user
         alert('An unexpected error occurred. Please try again later.');
       });
     };
@@ -95,24 +80,6 @@ const ExpenseScreen = ({ navigation }) => {
           <Text style={styles.inputTitle}>Add New Expense</Text>
           <TextInput
             style={styles.input}
-            placeholder="Expense Name"
-            value={expenseName}
-            onChangeText={(text) => setExpenseName(text)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Expense Amount"
-            value={expenseAmount}
-            onChangeText={(text) => setExpenseAmount(text)}
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Expense Date (YYYY-MM-DD)"
-            value={expenseDate}
-            onChangeText={(text) => setExpenseDate(text)}
-          />
-          <TouchableOpacity style={styles.addButton} onPress={handleAddExpense}>
             placeholder="Expense Name"
             value={expenseName}
             onChangeText={(text) => setExpenseName(text)}
