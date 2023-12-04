@@ -7,6 +7,7 @@ const ExpenseScreen = ({ navigation }) => {
   const [expenseDate, setExpenseDate] = useState('');
 
   const handleAddExpense = () => {/*
+    change to see if the committing works
     // Add logic to handle adding expense
     // You can use the values of expenseName, expenseAmount, and expenseDate
 
