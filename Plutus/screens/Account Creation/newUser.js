@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
-const createAcc = "http://3.37.164.69:3000/auth/create"
+const LoginUrl = "http://3.17.169.64:3000/auth/create"
 {/* Account Creation Component */ } 
 export const NewUser = ({ navigation }) => {
 
@@ -9,42 +8,34 @@ export const NewUser = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLastName] = useState('');
-    const handleInput = async() => {
-
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('First Name: ', firstName); 
-    console.log('Last Name: ', lastName); 
-
-    fetch(createAcc, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-      }),
-    })
-    .then(response => response.json())
+    const [errorText, setErrorText] = useState(<></>);
+    function createuser() {
+      fetch(LoginUrl, {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: email,
+    password: password,
+    firstName: firstName,
+    lastName: lastName
+  }),
+}).then(response => response.json())
     .then(json => {
       console.log(json);
-
-      // Check if account creation was successful
-      if (json.status === "create_account_success" && json.id) {
-        navigation.navigate('Home');
-      } else {
-        console.error('Failed to create account or login.');
-      }
+      if (json.status == "create_account_success") {
+        navigation.navigate('Login');
+      }       
+      else {
+      setErrorText("Email is already in use, please reenter a new email")
+      } 
     })
     .catch(error => {
       console.error(error);
     });
-};
-        
+    }
     return(
     <View style = {styles.container}>
         
@@ -62,8 +53,11 @@ export const NewUser = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.linkText}>Click here</Text>
         </TouchableOpacity>
+        
       </View>
-
+      <View style={{minHeight: "4%"}}>
+      <Text style={styles.errtext}>{errorText}</Text>
+      </View>
       <TextInput
         style= {styles.input}
         placeholder="First Name"
@@ -95,7 +89,7 @@ export const NewUser = ({ navigation }) => {
         style={styles.button}
         backgroundColor={'#C8FACD'} // Lighter green color
         onPress={() => {
-        handleInput(); 
+          createuser();
           
         }}
     >
@@ -152,6 +146,10 @@ const styles = StyleSheet.create({
       newUserText: {
         color:'#FFFFFF',
       },
+      errtext: {
+        fontSize: 20,
+        fontWeight: 'bold',
+      }
 });
   
 export default NewUser; 
