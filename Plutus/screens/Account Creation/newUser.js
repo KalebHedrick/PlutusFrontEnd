@@ -1,13 +1,50 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
+const createAcc = "http://3.37.164.69:3000/auth/create"
 {/* Account Creation Component */ } 
 export const NewUser = ({ navigation }) => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLastName] = useState('');
-    
+    const handleInput = async() => {
+
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('First Name: ', firstName); 
+    console.log('Last Name: ', lastName); 
+
+    fetch(createAcc, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      }),
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+
+      // Check if account creation was successful
+      if (json.status === "create_account_success" && json.id) {
+        navigation.navigate('Home');
+      } else {
+        console.error('Failed to create account or login.');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+        
     return(
     <View style = {styles.container}>
         
@@ -56,9 +93,9 @@ export const NewUser = ({ navigation }) => {
       />
       <TouchableOpacity
         style={styles.button}
-        Texr={'#C8FACD'} // Lighter green color
+        backgroundColor={'#C8FACD'} // Lighter green color
         onPress={() => {
-          navigation.navigate('Home')
+        handleInput(); 
           
         }}
     >
