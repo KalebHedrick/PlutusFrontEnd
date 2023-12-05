@@ -89,25 +89,34 @@ const IncomeScreen = ({ navigation }) => {
           {/* Income Input Section */}
           <View style={styles.inputSection}>
             <Text style={styles.inputTitle}>Add New Income</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Income Name"
-              value={incomeName}
-              onChangeText={(text) => setIncomeName(text)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Income Amount"
-              value={incomeAmount}
-              onChangeText={(text) => setIncomeAmount(text)}
-              keyboardType="numeric"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Income Date (YYYY-MM-DD)"
-              value={incomeDate}
-              onChangeText={(text) => setIncomeDate(text)}
-            />
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Income Name:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Income Name"
+                value={incomeName}
+                onChangeText={(text) => setIncomeName(text)}
+              />
+            </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Income Amount:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Amount"
+                value={incomeAmount}
+                onChangeText={(text) => setIncomeAmount(text)}
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Income Date (YYYY-MM-DD):</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Date YYYY-MM-DD"
+                value={incomeDate}
+                onChangeText={(text) => setIncomeDate(text)}
+              />
+            </View>
 
             <TouchableOpacity style={styles.addButton} onPress={() => handleAddIncome()}>
               <Text style={styles.addButtonText}>Add Income</Text>
@@ -341,6 +350,13 @@ const styles = StyleSheet.create({
   },
   editSection: {
     flex: 1,
+  },
+  inputBox: {
+    marginBottom: 10,
+  },
+  inputLabel: {
+    fontSize: 16,
+    marginBottom: 5,
   },
 });
 
