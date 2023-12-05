@@ -18,8 +18,8 @@ const IncomeScreen = ({ navigation }) => {
   
     const fetchMonthlyIncome = async () => {
       try {
-        // Add logic to fetch the monthly income from the backend
-        const response = await fetch('/incomes/all?email=planwithplutus@gmail.com');
+        // Fetch the monthly income from the backend
+        const response = await fetch('http://3.17.169.64:3000/incomes/all?email=planwithplutus@gmail.com');
         const result = await response.json();
         // Update the value of monthly income
         setMonthlyIncome(result.reduce((total, income) => total + income.amount, 0));
@@ -30,8 +30,8 @@ const IncomeScreen = ({ navigation }) => {
   
     const fetchAllIncomes = async () => {
       try {
-        // Add logic to fetch all incomes from the backend
-        const response = await fetch('/incomes/all?email=planwithplutus@gmail.com');
+        // Fetch all incomes from the backend
+        const response = await fetch('http://3.17.169.64:3000/incomes/all?email=planwithplutus@gmail.com');
         const result = await response.json();
         // Update the value of all incomes
         setAllIncomes(result);
@@ -41,9 +41,6 @@ const IncomeScreen = ({ navigation }) => {
     };
   
     const handleAddIncome = async () => {
-      // Add logic to handle adding income
-      // You can use the values of incomeType, incomeAmount, and incomeDate
-  
       // Check if any of the required fields are empty
       if (!incomeType || !incomeAmount || !incomeDate) {
         // Handle error, show an alert to the user
@@ -53,7 +50,7 @@ const IncomeScreen = ({ navigation }) => {
   
       try {
         // Make a POST request to add income to the backend
-        const response = await fetch('/incomes/add', {
+        const response = await fetch('http://3.17.169.64:3000/incomes/add', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
