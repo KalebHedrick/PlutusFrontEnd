@@ -120,7 +120,7 @@ const IncomeScreen = ({ navigation }) => {
           {/* Edit Income Section */}
           <View style={styles.editSection}>
             <Text style={styles.inputTitle}>Edit Incomes</Text>
-            <IncomeList data={incomeList} retrieveIncomes={retrieveIncomes} />
+            <IncomeList data={incomeList} />
           </View>
         </View>
       </View>
@@ -129,7 +129,7 @@ const IncomeScreen = ({ navigation }) => {
 };
 
 // INCOME LIST EDITOR CODE
-const IncomeList = ({ data, retrieveIncomes }) => {
+const IncomeList = ({ data, onDeleteItem }) => {
   const IncomeItem = ({ item }) => (
     <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20 }}>
       <Text style={{ fontSize: 30 }}>{item.type}</Text>
@@ -140,31 +140,17 @@ const IncomeList = ({ data, retrieveIncomes }) => {
     </View>
   );
 
-  const onDeleteItem = (id) => {
+  function onDeleteItem(id) {
     let deleteURL = 'http://3.17.169.64:3000/incomes/delete?email=' + userEmail + '&incomeIds=' + id;
     console.log(deleteURL);
-
     fetch(deleteURL, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.status === 'income_delete_success') {
-          // Refresh incomes after successful deletion
-          retrieveIncomes();
-        } else {
-          alert(`Failed to delete income. Error: ${json.message}`);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        alert('An unexpected error occurred. Please try again later.');
-      });
-  };
+    });
+  }
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -359,3 +345,5 @@ const styles = StyleSheet.create({
 });
 
 export default IncomeScreen;
+
+
