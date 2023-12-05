@@ -59,46 +59,49 @@ const IncomeScreen = ({ navigation }) => {
         <Text style={styles.viewIncomeText}>Viewing Income Details</Text>
       </View>
 
-      {/* Left Section (Display Details) */}
-      <View style={styles.leftSection}>
-        {/* Add your logic for displaying income details here */}
-      </View>
+      {/* Split Screen */}
+      <View style={styles.splitScreen}>
+        {/* Left Section (Display Details) */}
+        <View style={styles.leftSection}>
+          {/* Add your logic for displaying income details here */}
+        </View>
 
-      {/* Right Section (Add New Income) */}
-      <View style={styles.rightSection}>
-        <View style={styles.inputSection}>
-          <Text style={styles.inputTitle}>Add New Income</Text>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Amount:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter amount"
-              value={incomeAmount}
-              onChangeText={(text) => setIncomeAmount(text)}
-              keyboardType="numeric"
-            />
+        {/* Right Section (Add New Income) */}
+        <View style={styles.rightSection}>
+          <View style={styles.inputSection}>
+            <Text style={styles.inputTitle}>Add New Income</Text>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Amount:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter amount"
+                value={incomeAmount}
+                onChangeText={(text) => setIncomeAmount(text)}
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Income Date:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter date (YYYY-MM-DD)"
+                value={incomeDate}
+                onChangeText={(text) => setIncomeDate(text)}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Income Type:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter income type"
+                value={incomeType}
+                onChangeText={(text) => setIncomeType(text)}
+              />
+            </View>
+            <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
+              <Text style={styles.addButtonText}>Add Income</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Income Date in YYYY-MM-DD format:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter date (YYYY-MM-DD)"
-              value={incomeDate}
-              onChangeText={(text) => setIncomeDate(text)}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Income Type:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter income type"
-              value={incomeType}
-              onChangeText={(text) => setIncomeType(text)}
-            />
-          </View>
-          <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
-            <Text style={styles.addButtonText}>Add Income</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -108,17 +111,20 @@ const IncomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
   },
   topBar: {
-    flex: 1,
     backgroundColor: '#000103',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 15,
   },
   viewIncomeText: {
     color: '#FFFFFF',
     fontSize: 18,
+  },
+  splitScreen: {
+    flex: 1,
+    flexDirection: 'row',
   },
   leftSection: {
     flex: 1,
