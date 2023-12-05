@@ -142,7 +142,7 @@ const ExpenseScreen = ({ navigation }) => {
 //EXPENSE LIST EDITOR CODE
 const ExpenseList = ({ data, onDeleteItem }) => {
   const ExpenseItem = ({ item }) => (
-    <View style={{flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20}}>
+    <View style={{flexDirection: "column", justifyContent: "space-evenly", borderWidth: 3, borderRadius: 20, backgroundColor:"white"}}>
       <Text style={{fontSize: 30}}>{item.type}</Text>
       <Text style={{fontSize: 30}}>amount: ${item.amount}</Text>
       <TouchableOpacity onPress={() => onDeleteItem(item.expenseId)} style={{fontSize: 15, padding:10, alignSelf:"flex-start"}}>
@@ -185,7 +185,7 @@ const TimeComponent = () => {
   const [selectedInterval, setSelectedInterval] = useState('Today');
   const [data, setData] = useState('');
    const ExpenseItem = ({ item }) => (
-    <View style={{flexDirection: "column", justifyContent: "space-evenly", borderColor: "#000000", borderWidth: 3, borderRadius: 20}}>
+    <View style={{flexDirection: "column", justifyContent: "space-evenly", borderColor: "#000000", borderWidth: 3, borderRadius: 20, backgroundColor:"white"}}>
       <Text style={{fontSize: 30}}>{item.type}</Text>
       <Text style={{fontSize: 30}}>amount ${item.amount}</Text>
       
@@ -340,6 +340,7 @@ const styles = StyleSheet.create({
   rightSection: {
     flex: 2,
     padding: 20,
+    backgroundColor: '#69DC9E',
   },
   inputSection: {
     marginBottom: 20,

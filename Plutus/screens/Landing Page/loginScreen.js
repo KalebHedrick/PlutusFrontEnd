@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#C8FACD', // Lighter green color
+    backgroundColor: '#69DC9E', // Lighter green color
   },
   title: {
     fontSize: 64,

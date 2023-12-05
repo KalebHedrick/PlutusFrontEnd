@@ -6,39 +6,40 @@ const SettingsScreen = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const handleDeleteAccount = () => {
-    Alert.alert(
-      'Are you sure?',
-      'This action is irreversible. Do you really want to delete your account?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Delete', onPress: () => deleteAccount() },
-      ]
-    );
-  };
 
   const deleteAccount = async () => {
-    // Implement your logic to delete the account here
-    // This could involve making a DELETE request to your server
-    // and handling the response accordingly
-    // Example:
-    // try {
-    //   const response = await fetch('your-delete-account-endpoint', {
-    //     method: 'DELETE',
-    //     headers: {
-    //       'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-    //     },
-    //   });
-    //   // Handle the response
-    // } catch (error) {
-    //   console.error('Error deleting account:', error);
-    // }
-    navigation.navigate("Login");
+     try {
+      alert("Account Deleted")
+       const response = await fetch('http://3.17.169.64:3000/auth/delete', {
+         method: 'DELETE',
+        headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+         body: JSON.stringify({
+    email: userEmail,
+    password: userPassword,
+  }),
+       }).then(res => {res.json})
+       .then(res => {
+        if (res.status == "delete_account_success") {
+        alert("Your account has been deleted");
+        navigation.navigate("Login");
+        }
+        else {
+          alert("error deleting account");
+        }
+       });
+       // Handle the response
+     } catch (error) {
+       console.error('Error deleting account:', error);
+     }
+    
   };
 
-  const handleUpdateUserInfo = async () => {
-     try {
-      const response = await fetch('http://3.17.169.64:3000/auth/update', {
+  const handleUpdateUserInfo =  () => {
+     
+      fetch('http://3.17.169.64:3000/auth/update', {
          method: 'PUT',
          headers: {
         Accept: 'application/json',
@@ -51,16 +52,13 @@ const SettingsScreen = ({navigation}) => {
            lastName: lastName,
          }),
        });
-       // Handle the response
-     } catch (error) {
-       console.error('Error updating user information:', error);
-     }
-  };
+      }
+    
 
   return (
     <View style = {{flexDirection:"column", justifyContent: "space-evenly", flex: 1, backgroundColor: "#69DC9E"}}>
       <Text style={{fontSize: 40}}>Delete Account</Text>
-      <TouchableOpacity style={styles.addButton} onPress={() => {handleDeleteAccount()}}>
+      <TouchableOpacity style={styles.addButton} onPress={() => {deleteAccount()}}>
             <Text style={styles.addButtonText}>DELETE ACCOUNT</Text>
           </TouchableOpacity>
 
