@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const IncomeScreen = ({ navigation }) => {
+  const [incomeType, setIncomeType] = useState('');
   const [incomeAmount, setIncomeAmount] = useState('');
   const [incomeDate, setIncomeDate] = useState('');
-  const [incomeType, setIncomeType] = useState('');
 
   const handleAddIncome = () => {
     // Add logic to handle adding income
-    // You can use the values of incomeAmount, incomeDate, and incomeType
+    // You can use the values of incomeType, incomeAmount, and incomeDate
 
     // Check if any of the required fields are empty
-    if (!incomeAmount || !incomeDate || !incomeType) {
+    if (!incomeType || !incomeAmount || !incomeDate) {
       // Handle error, show an alert to the user
       alert('Please fill in all the fields.');
       return;
@@ -21,8 +21,9 @@ const IncomeScreen = ({ navigation }) => {
       email: 'planwithplutus@gmail.com',
       amount: parseFloat(incomeAmount),
       currency: 'usd',
+      incomeType: incomeType,
       incomeDate: incomeDate,
-      type: incomeType,
+      // You can add other fields based on your backend API requirements
     };
 
     // Make a POST request to the backend API
@@ -61,43 +62,40 @@ const IncomeScreen = ({ navigation }) => {
 
       {/* Split Screen */}
       <View style={styles.splitScreen}>
-        {/* Left Section (Display Details) */}
+        {/* Left Section - Add your content here */}
         <View style={styles.leftSection}>
-          {/* Add your logic for displaying income details here */}
+          {/* Placeholder for left section content */}
         </View>
 
-        {/* Right Section (Add New Income) */}
+        {/* Right Section - Add new income */}
         <View style={styles.rightSection}>
+          <Text style={styles.inputTitle}>Add New Income</Text>
           <View style={styles.inputSection}>
-            <Text style={styles.inputTitle}>Add New Income</Text>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Amount:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter amount"
-                value={incomeAmount}
-                onChangeText={(text) => setIncomeAmount(text)}
-                keyboardType="numeric"
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Income Date:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter date (YYYY-MM-DD)"
-                value={incomeDate}
-                onChangeText={(text) => setIncomeDate(text)}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Income Type:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter income type"
-                value={incomeType}
-                onChangeText={(text) => setIncomeType(text)}
-              />
-            </View>
+            <Text style={styles.inputLabel}>Income Type:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Income Type"
+              value={incomeType}
+              onChangeText={(text) => setIncomeType(text)}
+            />
+
+            <Text style={styles.inputLabel}>Amount:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Income Amount"
+              value={incomeAmount}
+              onChangeText={(text) => setIncomeAmount(text)}
+              keyboardType="numeric"
+            />
+
+            <Text style={styles.inputLabel}>Income Date (YYYY-MM-DD):</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Income Date"
+              value={incomeDate}
+              onChangeText={(text) => setIncomeDate(text)}
+            />
+
             <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
               <Text style={styles.addButtonText}>Add Income</Text>
             </TouchableOpacity>
@@ -111,12 +109,13 @@ const IncomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
   },
   topBar: {
+    height: 50,
     backgroundColor: '#000103',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 15,
   },
   viewIncomeText: {
     color: '#FFFFFF',
@@ -136,15 +135,12 @@ const styles = StyleSheet.create({
     flex: 2,
     padding: 20,
   },
-  inputSection: {
-    marginBottom: 20,
-  },
   inputTitle: {
     fontSize: 18,
     marginBottom: 10,
   },
-  inputContainer: {
-    marginBottom: 15,
+  inputSection: {
+    marginBottom: 20,
   },
   inputLabel: {
     fontSize: 16,
