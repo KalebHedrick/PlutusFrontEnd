@@ -54,26 +54,6 @@ export const HomeScreen = ({ navigation }) => {
           >
             <Text style={styles.textStyle}>Expenses</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#000103' }}
-            onPress={() => {
-              navigation.navigate('AddBudgetCategory');
-            }}
-          >
-            <Text style={styles.textStyle}>Budgeting</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{ ...styles.openButton, backgroundColor: '#000103' }}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-              navigation.navigate('UpdateProfile');
-            }}
-          >
-            <Text style={styles.textStyle}>Update Profile Information</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity
             style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
