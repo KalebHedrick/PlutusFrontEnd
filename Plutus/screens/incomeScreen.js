@@ -120,7 +120,7 @@ const IncomeScreen = ({ navigation }) => {
           {/* Edit Income Section */}
           <View style={styles.editSection}>
             <Text style={styles.inputTitle}>Edit Incomes</Text>
-            <IncomeList data={incomeList} />
+            <IncomeList data={incomeList} retrieveIncomes={retrieveIncomes} />
           </View>
         </View>
       </View>
@@ -129,60 +129,59 @@ const IncomeScreen = ({ navigation }) => {
 };
 
 // INCOME LIST EDITOR CODE
-const IncomeList = ({ data }) => {
-    const IncomeItem = ({ item }) => (
-      <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20 }}>
-        <Text style={{ fontSize: 30 }}>{item.type}</Text>
-        <Text style={{ fontSize: 30 }}>amount: ${item.amount}</Text>
-        <TouchableOpacity onPress={() => onDeleteItem(item.incomeId)} style={{ fontSize: 15, padding: 10, alignSelf: "flex-start" }}>
-          <Text style={{ borderColor: "red", borderWidth: 3, borderRadius: 20 }}>Delete</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  
-    const onDeleteItem = (id) => {
-      let deleteURL = 'http://3.17.169.64:3000/incomes/delete?email=' + userEmail + '&incomeIds=' + id;
-      console.log(deleteURL);
-      
-      fetch(deleteURL, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+const IncomeList = ({ data, retrieveIncomes }) => {
+  const IncomeItem = ({ item }) => (
+    <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20 }}>
+      <Text style={{ fontSize: 30 }}>{item.type}</Text>
+      <Text style={{ fontSize: 30 }}>amount: ${item.amount}</Text>
+      <TouchableOpacity onPress={() => onDeleteItem(item.incomeId)} style={{ fontSize: 15, padding: 10, alignSelf: "flex-start" }}>
+        <Text style={{ borderColor: "red", borderWidth: 3, borderRadius: 20 }}>Delete</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const onDeleteItem = (id) => {
+    let deleteURL = 'http://3.17.169.64:3000/incomes/delete?email=' + userEmail + '&incomeIds=' + id;
+    console.log(deleteURL);
+
+    fetch(deleteURL, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.status === 'income_delete_success') {
+          // Refresh incomes after successful deletion
+          retrieveIncomes();
+        } else {
+          alert(`Failed to delete income. Error: ${json.message}`);
+        }
       })
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.status === 'income_delete_success') {
-            // Refresh incomes after successful deletion
-            retrieveIncomes();
-          } else {
-            alert(`Failed to delete income. Error: ${json.message}`);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          alert('An unexpected error occurred. Please try again later.');
-        });
-    };
-  
-    return (
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <IncomeItem item={item} />}
-          contentContainerStyle={{
-            flexGrow: 1,
-          }}
-          ItemSeparatorComponent={() => (
-            <View style={{ height: 2 }} />
-          )}
-        />
-      </ScrollView>
-    );
+      .catch((error) => {
+        console.error(error);
+        alert('An unexpected error occurred. Please try again later.');
+      });
   };
-  
+
+  return (
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <IncomeItem item={item} />}
+        contentContainerStyle={{
+          flexGrow: 1,
+        }}
+        ItemSeparatorComponent={() => (
+          <View style={{ height: 2 }} />
+        )}
+      />
+    </ScrollView>
+  );
+};
 
 // END OF INCOME LIST CODE
 
@@ -360,4 +359,3 @@ const styles = StyleSheet.create({
 });
 
 export default IncomeScreen;
-
