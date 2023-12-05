@@ -40,7 +40,7 @@ export const HomeScreen = ({ navigation }) => {
             style={{ ...styles.openButton, backgroundColor: '#000103' }}
             onPress={() => {
               setModalVisible(!modalVisible);
-              navigation.navigate('AddIncome');
+              navigation.navigate('Edit Income');
             }}
           >
             <Text style={styles.textStyle}>Add New Income Data</Text>
