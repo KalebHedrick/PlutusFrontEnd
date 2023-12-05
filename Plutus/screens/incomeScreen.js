@@ -79,66 +79,66 @@ const IncomeScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-          {/* Top Bar */}
-          <View style={styles.topBar}>
-            <Text style={styles.viewIncomeText}>Viewing Income Details</Text>
-          </View>
-    
-          {/* Split Screen */}
-          <View style={styles.splitScreen}>
-            {/* Left Section */}
-            <View style={styles.leftSection}>
-              {/* Monthly Income */}
-              <View style={styles.monthlyIncomeBox}>
-                <Text style={styles.incomeBoxTitle}>Monthly Income</Text>
-                <Text style={styles.incomeBoxAmount}>${monthlyIncome.toFixed(2)}</Text>
-              </View>
-    
-              {/* All Incomes */}
-              <View style={styles.allIncomesBox}>
-                <Text style={styles.incomeBoxTitle}>All Incomes</Text>
-                {allIncomes.map((income) => (
-                  <Text key={income._id} style={styles.incomeBoxItem}>
-                    {income.type}: ${income.amount.toFixed(2)}
-                  </Text>
-                ))}
-              </View>
+        <ScrollView style={styles.container}>
+            {/* Top Bar */}
+            <View style={styles.topBar}>
+                <Text style={styles.viewIncomeText}>Viewing Income Details</Text>
             </View>
-    
-            {/* Right Section */}
-            <View style={styles.rightSection}>
-              {/* Income Input Section */}
-              <View style={styles.inputSection}>
-                <Text style={styles.inputTitle}>Add New Income</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Income Type"
-                  value={incomeType}
-                  onChangeText={(text) => setIncomeType(text)}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Income Amount"
-                  value={incomeAmount}
-                  onChangeText={(text) => setIncomeAmount(text)}
-                  keyboardType="numeric"
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Income Date (YYYY-MM-DD)"
-                  value={incomeDate}
-                  onChangeText={(text) => setIncomeDate(text)}
-                />
-                <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
-                  <Text style={styles.addButtonText}>Add Income</Text>
-                </TouchableOpacity>
-              </View>
+
+            {/* Split Screen */}
+            <View style={styles.splitScreen}>
+                {/* Left Section */}
+                <View style={styles.leftSection}>
+                    {/* Monthly Income */}
+                    <View style={styles.monthlyIncomeBox}>
+                        <Text style={styles.incomeBoxTitle}>Monthly Income</Text>
+                        <Text style={styles.incomeBoxAmount}>${monthlyIncome.toFixed(2)}</Text>
+                    </View>
+
+                    {/* All Incomes */}
+                    <View style={styles.allIncomesBox}>
+                        <Text style={styles.incomeBoxTitle}>All Incomes</Text>
+                        {allIncomes.map((income) => (
+                            <Text key={income._id} style={styles.incomeBoxItem}>
+                                {income.type}: ${income.amount.toFixed(2)}
+                            </Text>
+                        ))}
+                    </View>
+                </View>
+
+                {/* Right Section */}
+                <View style={styles.rightSection}>
+                    {/* Income Input Section */}
+                    <View style={styles.inputSection}>
+                        <Text style={styles.inputTitle}>Add New Income</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Income Type"
+                            value={incomeType}
+                            onChangeText={(text) => setIncomeType(text)}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Income Amount"
+                            value={incomeAmount}
+                            onChangeText={(text) => setIncomeAmount(text)}
+                            keyboardType="numeric"
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Income Date (YYYY-MM-DD)"
+                            value={incomeDate}
+                            onChangeText={(text) => setIncomeDate(text)}
+                        />
+                        <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
+                            <Text style={styles.addButtonText}>Add Income</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
-          </View>
-        </View>
-      );
-    };
+        </ScrollView>
+    );
+};
     
     const styles = StyleSheet.create({
       container: {
