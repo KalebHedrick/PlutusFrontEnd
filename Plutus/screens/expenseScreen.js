@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, ScrollView, Picker } from 'react-native';
+let userEmail = localStorage.getItem('email');
 const ExpenseScreen = ({ navigation }) => {
   const [expenseName, setExpenseName] = useState('');
   const [expenseAmount, setExpenseAmount] = useState('');
   const [expenseDate, setExpenseDate] = useState('');
   const [expenseList, setExpenseList] = useState('');
    function retreiveExpenses() {
-    fetch('http://3.17.169.64:3000/expenses/all?email=planwithplutus@gmail.com', {
+    fetch('http://3.17.169.64:3000/expenses/all?email=' + userEmail, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -43,7 +44,7 @@ const ExpenseScreen = ({ navigation }) => {
     }
  
     const expenseData = {
-      email: 'planwithplutus@gmail.com', 
+      email: userEmail, 
       amount: parseFloat(expenseAmount), 
       currency: 'usd',
       method: 'credit_card', //can be credit_card or debit_card
@@ -80,22 +81,16 @@ const ExpenseScreen = ({ navigation }) => {
  
   return (
     <View style={styles.container}>
-      {/* Top Bar */}
       <View style={styles.topBar}>
         <Text style={styles.viewExpensesText}>View Expenses</Text>
       </View>
+      <View style={{flexDirection:"row", flex:1}}>
+      {/* Top Bar */}
+      
  
       {/* Left Section */}
       <View style={styles.leftSection}>
-        <View style={styles.categoryBox}>
-          <Text style={styles.categoryText}>Daily Expenses</Text>
-        </View>
-        <View style={styles.categoryBox}>
-          <Text style={styles.categoryText}>Weekly Expenses</Text>
-        </View>
-        <View style={styles.categoryBox}>
-          <Text style={styles.categoryText}>Monthly Expenses</Text>
-        </View>
+        <TimeComponent/>
       </View>
  
       {/* Right Section */}
@@ -139,6 +134,7 @@ const ExpenseScreen = ({ navigation }) => {
           <ExpenseList data={expenseList}/>
         </View>
       </View>
+      </View>
     </View>
   );
 };
@@ -147,15 +143,15 @@ const ExpenseScreen = ({ navigation }) => {
 const ExpenseList = ({ data, onDeleteItem }) => {
   const ExpenseItem = ({ item }) => (
     <View style={{flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20}}>
-      <Text style={{fontSize: 30}}>expense type:{item.type}</Text>
-      <Text style={{fontSize: 30}}>expense amount: ${item.amount}</Text>
+      <Text style={{fontSize: 30}}>{item.type}</Text>
+      <Text style={{fontSize: 30}}>amount: ${item.amount}</Text>
       <TouchableOpacity onPress={() => onDeleteItem(item.expenseId)} style={{fontSize: 15, padding:10, alignSelf:"flex-start"}}>
         <Text style={{borderColor: "red", borderWidth: 3, borderRadius: 20}}>Delete</Text>
       </TouchableOpacity>
     </View>
   )
   function onDeleteItem(id) {
-    let deleteURL = 'http://3.17.169.64:3000/expenses/delete?email=planwithplutus@gmail.com&expenseIds=' + id
+    let deleteURL = 'http://3.17.169.64:3000/expenses/delete?email=' + userEmail + '&expenseIds=' + id
     console.log(deleteURL);
     fetch(deleteURL, {
   method: 'DELETE',
@@ -184,13 +180,140 @@ const ExpenseList = ({ data, onDeleteItem }) => {
 
 //END OF EXPENSE LIST CODE
 
+
+const TimeComponent = () => {
+  const [selectedInterval, setSelectedInterval] = useState('Today');
+  const [data, setData] = useState('');
+   const ExpenseItem = ({ item }) => (
+    <View style={{flexDirection: "column", justifyContent: "space-evenly", borderColor: "#000000", borderWidth: 3, borderRadius: 20}}>
+      <Text style={{fontSize: 30}}>{item.type}</Text>
+      <Text style={{fontSize: 30}}>amount ${item.amount}</Text>
+      
+    </View>
+  )
+  useEffect(() => {
+    
+    // Fetch or generate data based on the selected interval
+    const fetchData = async () => {
+      // Replace this with your logic to fetch data based on the selected interval
+      let newData = [];
+      let today = getTodaysDate();
+      let week = getOneWeekAgo();
+      let month = getOneMonthAgo();
+      switch (selectedInterval) {
+        
+        case 'Daily':
+        
+         let res =await fetch('http://3.17.169.64:3000/expenses/bydaterange?email=' + userEmail + '&startDate=' + today + '&endDate=' + today,{
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },  
+})
+newData = await res.json()
+          break;
+        case 'Weekly':
+            let res2 =await fetch('http://3.17.169.64:3000/expenses/bydaterange?email=' + userEmail + '&startDate=' + week + '&endDate=' + today,{
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },  
+})
+newData = await res2.json()
+
+          break;
+        case 'Monthly':
+           let res3 =await fetch('http://3.17.169.64:3000/expenses/bydaterange?email=' + userEmail + '&startDate=' + month + '&endDate=' + today,{
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },  
+})
+newData = await res3.json()
+          break;
+        default:
+          break;
+      }
+      setData(newData)
+    };
+    
+    fetchData();
+  }, [selectedInterval]);
+  console.log(data);
+  return (
+    <View>
+      {/* Dropdown to select interval */}
+      <Text style={styles.inputTitle}>Select a timeframe</Text>
+      <Picker
+        selectedValue={selectedInterval}
+        onValueChange={(itemValue) => setSelectedInterval(itemValue)}
+        style = {{margin:6, alignSelf: "flex-start"}}
+      >
+        <Picker.Item label="Today" value="Daily" />
+        <Picker.Item label="Last 7 days" value="Weekly" />
+        <Picker.Item label="Last 30 days" value="Monthly" />
+      </Picker>
+
+      {/* FlatList to display data based on the selected interval */}
+     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <FlatList
+      data={data}
+      extraData={data}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => <ExpenseItem item={item} />}
+      contentContainerStyle={{
+    flexGrow: 1,
+    }}
+    ItemSeparatorComponent={() => (
+              <View style={{ height: 2}} />
+            )}
+    />
+    </ScrollView>
+    </View>
+  );
+};
+//helper date functions
+function getTodaysDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+function getOneWeekAgo() {
+  const today = new Date();
+  const oneWeekAgo = new Date(today);
+  oneWeekAgo.setDate(today.getDate() - 7);
+
+  const year = oneWeekAgo.getFullYear();
+  const month = String(oneWeekAgo.getMonth() + 1).padStart(2, '0');
+  const day = String(oneWeekAgo.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+function getOneMonthAgo() {
+  const today = new Date();
+  const thirtyDaysAgo = new Date(today);
+  thirtyDaysAgo.setDate(today.getDate() - 30);
+
+  const year = thirtyDaysAgo.getFullYear();
+  const month = String(thirtyDaysAgo.getMonth() + 1).padStart(2, '0');
+  const day = String(thirtyDaysAgo.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    
   },
   topBar: {
-    flex: 1,
+    height: "5%",
+    width: "100%",
     backgroundColor: '#000103',
     justifyContent: 'center',
     alignItems: 'center',
@@ -202,8 +325,7 @@ const styles = StyleSheet.create({
   leftSection: {
     flex: 1,
     backgroundColor: '#69DC9E',
-    justifyContent: 'center',
-    alignItems: 'center',
+    
   },
   categoryBox: {
     backgroundColor: '#FFFFFF',
@@ -251,3 +373,4 @@ const styles = StyleSheet.create({
 });
  
 export default ExpenseScreen;
+

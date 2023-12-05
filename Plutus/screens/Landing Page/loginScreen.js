@@ -11,7 +11,8 @@ const Login = ({ navigation }) => {
 //post for login info
     console.log('Email:', email);
     console.log('Password:', password);
-
+localStorage.setItem('email', email)
+localStorage.setItem('password', password)
     fetch(LoginUrl, {
   method: 'POST',
   headers: {

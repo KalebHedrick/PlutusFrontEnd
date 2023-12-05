@@ -7,6 +7,7 @@ import { HomeScreen } from './screens/homeScreen';
 import { NewUser } from './screens/Account Creation/newUser';
 import ExpenseScreen from './screens/expenseScreen';
 import IncomeScreen from './screens/incomeScreen';
+import SettingsScreen from './screens/settings';
 const Tab = createNativeStackNavigator();
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Tab.Screen name ="New User" component={NewUser} />
         <Tab.Screen name = "Add Expense" component={ExpenseScreen} /> 
         <Tab.Screen name = "Edit Income" component = {IncomeScreen}/>
+        <Tab.Screen name = "Settings" component = {SettingsScreen}/>
       </Tab.Navigator>
     </NavigationContainer>
       

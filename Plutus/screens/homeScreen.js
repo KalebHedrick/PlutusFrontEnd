@@ -4,7 +4,6 @@ import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 // HomeScreen component
 export const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to Your Budget App</Text>
@@ -43,7 +42,7 @@ export const HomeScreen = ({ navigation }) => {
               navigation.navigate('Edit Income');
             }}
           >
-            <Text style={styles.textStyle}>Add New Income Data</Text>
+            <Text style={styles.textStyle}>Income</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -53,7 +52,7 @@ export const HomeScreen = ({ navigation }) => {
               navigation.navigate('Add Expense');
             }}
           >
-            <Text style={styles.textStyle}>Add New Expense Data</Text>
+            <Text style={styles.textStyle}>Expenses</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -62,7 +61,7 @@ export const HomeScreen = ({ navigation }) => {
               navigation.navigate('AddBudgetCategory');
             }}
           >
-            <Text style={styles.textStyle}>Add New Budget Category</Text>
+            <Text style={styles.textStyle}>Budgeting</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
