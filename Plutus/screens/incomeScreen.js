@@ -213,6 +213,9 @@ const IncomeScreen = ({ navigation }) => {
       addButtonText: {
         color: '#FFFFFF',
       },
+      incomesList: {
+        maxHeight: 200, 
+      },
     });
 
 export default IncomeScreen;
