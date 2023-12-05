@@ -79,79 +79,71 @@ const IncomeScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-          {/* Top Bar */}
-          <View style={styles.topBar}>
-            <Text style={styles.viewIncomeText}>Viewing Income Details</Text>
-          </View>
-    
-          {/* Split Screen */}
-          <ScrollView style={styles.scrollContainer}>
-            {/* Left Section */}
-            <View style={styles.leftSection}>
-              {/* Monthly Income */}
-              <View style={styles.monthlyIncomeBox}>
-                <Text style={styles.incomeBoxTitle}>Monthly Income</Text>
-                <Text style={styles.incomeBoxAmount}>${monthlyIncome.toFixed(2)}</Text>
-              </View>
-    
-              {/* All Incomes */}
-              <View style={styles.allIncomesBox}>
-                <Text style={styles.incomeBoxTitle}>All Incomes</Text>
-                <ScrollView style={styles.incomesList}>
-                  {allIncomes.map((income) => (
-                    <View key={income._id} style={styles.incomeItem}>
-                      <Text style={styles.incomeDate}>{income.incomeDate}</Text>
-                      <Text style={styles.incomeDetails}>
-                        Type: {income.type}, Amount: ${income.amount.toFixed(2)}
-                      </Text>
+        <ScrollView style={styles.container}>
+            {/* Top Bar */}
+            <View style={styles.topBar}>
+                <Text style={styles.viewIncomeText}>Viewing Income Details</Text>
+            </View>
+
+            {/* Split Screen */}
+            <View style={styles.splitScreen}>
+                {/* Left Section */}
+                <View style={styles.leftSection}>
+                    {/* Monthly Income */}
+                    <View style={styles.monthlyIncomeBox}>
+                        <Text style={styles.incomeBoxTitle}>Monthly Income</Text>
+                        <Text style={styles.incomeBoxAmount}>${monthlyIncome.toFixed(2)}</Text>
                     </View>
-                  ))}
-                </ScrollView>
-              </View>
+
+                    {/* All Incomes */}
+                    <View style={styles.allIncomesBox}>
+                        <Text style={styles.incomeBoxTitle}>All Incomes</Text>
+                        {allIncomes.map((income) => (
+                            <Text key={income._id} style={styles.incomeBoxItem}>
+                                {income.type}: ${income.amount.toFixed(2)}
+                            </Text>
+                        ))}
+                    </View>
+                </View>
+
+                {/* Right Section */}
+                <View style={styles.rightSection}>
+                    {/* Income Input Section */}
+                    <View style={styles.inputSection}>
+                        <Text style={styles.inputTitle}>Add New Income</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Income Type"
+                            value={incomeType}
+                            onChangeText={(text) => setIncomeType(text)}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Income Amount"
+                            value={incomeAmount}
+                            onChangeText={(text) => setIncomeAmount(text)}
+                            keyboardType="numeric"
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Income Date (YYYY-MM-DD)"
+                            value={incomeDate}
+                            onChangeText={(text) => setIncomeDate(text)}
+                        />
+                        <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
+                            <Text style={styles.addButtonText}>Add Income</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
-    
-            {/* Right Section */}
-            <View style={styles.rightSection}>
-              {/* Income Input Section */}
-              <View style={styles.inputSection}>
-                <Text style={styles.inputTitle}>Add New Income</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Income Type"
-                  value={incomeType}
-                  onChangeText={(text) => setIncomeType(text)}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Income Amount"
-                  value={incomeAmount}
-                  onChangeText={(text) => setIncomeAmount(text)}
-                  keyboardType="numeric"
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Income Date (YYYY-MM-DD)"
-                  value={incomeDate}
-                  onChangeText={(text) => setIncomeDate(text)}
-                />
-                <TouchableOpacity style={styles.addButton} onPress={handleAddIncome}>
-                  <Text style={styles.addButtonText}>Add Income</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ScrollView>
-        </View>
-      );
-    };
+        </ScrollView>
+    );
+};
     
     const styles = StyleSheet.create({
       container: {
         flex: 1,
         flexDirection: 'column',
-      },
-      scrollContainer: {
-        flex: 1,
       },
       topBar: {
         backgroundColor: '#000103',
@@ -162,6 +154,10 @@ const IncomeScreen = ({ navigation }) => {
       viewIncomeText: {
         color: '#FFFFFF',
         fontSize: 18,
+      },
+      splitScreen: {
+        flex: 1,
+        flexDirection: 'row',
       },
       leftSection: {
         flex: 1,
@@ -186,19 +182,9 @@ const IncomeScreen = ({ navigation }) => {
         borderRadius: 10,
         padding: 10,
       },
-      incomesList: {
-        maxHeight: 200, // Set a max height for the list to make it scrollable
-      },
-      incomeItem: {
-        marginBottom: 10,
-      },
-      incomeDate: {
+      incomeBoxItem: {
         fontSize: 16,
-        fontWeight: 'bold',
         marginBottom: 5,
-      },
-      incomeDetails: {
-        fontSize: 14,
       },
       rightSection: {
         flex: 2,
@@ -227,4 +213,9 @@ const IncomeScreen = ({ navigation }) => {
       addButtonText: {
         color: '#FFFFFF',
       },
+      incomesList: {
+        maxHeight: 200, 
+      },
     });
+
+export default IncomeScreen;
