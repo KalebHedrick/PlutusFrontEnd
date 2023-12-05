@@ -131,7 +131,7 @@ const IncomeScreen = ({ navigation }) => {
 // INCOME LIST EDITOR CODE
 const IncomeList = ({ data, onDeleteItem }) => {
   const IncomeItem = ({ item }) => (
-    <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20 }}>
+    <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderWidth: 3, borderRadius: 20, backgroundColor: "white" }}>
       <Text style={{ fontSize: 30 }}>{item.type}</Text>
       <Text style={{ fontSize: 30 }}>amount: ${item.amount}</Text>
       <TouchableOpacity onPress={() => onDeleteItem(item.incomeId)} style={{ fontSize: 15, padding: 10, alignSelf: "flex-start" }}>
@@ -175,7 +175,7 @@ const TimeComponent = () => {
   const [selectedInterval, setSelectedInterval] = useState('Today');
   const [data, setData] = useState('');
   const IncomeItem = ({ item }) => (
-    <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#000000", borderWidth: 3, borderRadius: 20 }}>
+    <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#000000", borderWidth: 3, borderRadius: 20, backgroundColor: '#FFFFFF', }}>
       <Text style={{ fontSize: 30 }}>{item.type}</Text>
       <Text style={{ fontSize: 30 }}>amount ${item.amount}</Text>
     </View>
@@ -314,6 +314,7 @@ const styles = StyleSheet.create({
   rightSection: {
     flex: 2,
     padding: 20,
+     backgroundColor: '#69DC9E',
   },
   inputSection: {
     marginBottom: 20,
