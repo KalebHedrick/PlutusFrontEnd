@@ -43,10 +43,10 @@ const ExpenseScreen = ({ navigation }) => {
     }
  
     const expenseData = {
-      email: 'planwithplutus@gmail.com', // You may get this dynamically based on the logged-in user
-      amount: parseFloat(expenseAmount), // Convert the amount to a float
+      email: 'planwithplutus@gmail.com', 
+      amount: parseFloat(expenseAmount), 
       currency: 'usd',
-      method: 'credit_card',
+      method: 'credit_card', //can be credit_card or debit_card
       expenseDate: expenseDate,
       type: expenseName
       // You can add other fields based on your backend API requirements
@@ -73,7 +73,7 @@ const ExpenseScreen = ({ navigation }) => {
         }})
       .catch((error) => {
         console.error(error);
-        // Handle error, show an alert to the user
+        // Handle error, show alert to the user
         alert('An unexpected error occurred. Please try again later.');
       });
     };
