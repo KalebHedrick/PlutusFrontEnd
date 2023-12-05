@@ -82,6 +82,9 @@ const ExpenseScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
+        <TouchableOpacity style={HBstyles.button} onPress={() => {navigation.navigate("Home")}}>
+      <Text style={HBstyles.buttonText}>Go to {"Home"}</Text>
+    </TouchableOpacity>
         <Text style={styles.viewExpensesText}>View Expenses</Text>
       </View>
       <View style={{flexDirection:"row", flex:1}}>
@@ -90,6 +93,7 @@ const ExpenseScreen = ({ navigation }) => {
  
       {/* Left Section */}
       <View style={styles.leftSection}>
+        
         <TimeComponent/>
       </View>
  
@@ -124,7 +128,6 @@ const ExpenseScreen = ({ navigation }) => {
           <TouchableOpacity style={styles.addButton} onPress={() => {retreiveExpenses()}}>
             <Text style={styles.addButtonText}>Refresh expense list</Text>
           </TouchableOpacity>
-      
         </View>
  
         {/* Edit Expense Section */}
@@ -306,6 +309,22 @@ function getOneMonthAgo() {
 
   return `${year}-${month}-${day}`;
 }
+
+
+const HBstyles = StyleSheet.create({
+  button: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 const styles = StyleSheet.create({
   container: {
     flex: 1,

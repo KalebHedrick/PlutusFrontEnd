@@ -74,6 +74,9 @@ const IncomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
+        <TouchableOpacity style={HBstyles.button} onPress={() => {navigation.navigate("Home")}}>
+      <Text style={HBstyles.buttonText}>Go to {"Home"}</Text>
+    </TouchableOpacity>
         <Text style={styles.viewIncomesText}>View Income</Text>
       </View>
       <View style={{ flexDirection: 'row', flex: 1 }}>
@@ -140,7 +143,7 @@ const IncomeScreen = ({ navigation }) => {
 // INCOME LIST EDITOR CODE
 const IncomeList = ({ data, onDeleteItem }) => {
   const IncomeItem = ({ item }) => (
-    <View style={{ flexDirection: "column", justifyContent: "space-evenly", borderColor: "#69DC9E", borderWidth: 3, borderRadius: 20 }}>
+    <View style={{ flexDirection: "column", justifyContent: "space-evenly"  , borderWidth: 3, borderRadius: 20, backgroundColor: "white" }}>
       <Text style={{ fontSize: 30 }}>{item.type}</Text>
       <Text style={{ fontSize: 30 }}>amount: ${item.amount}</Text>
       <TouchableOpacity onPress={() => onDeleteItem(item.incomeId)} style={{ fontSize: 15, padding: 10, alignSelf: "flex-start" }}>
@@ -300,7 +303,20 @@ function getOneMonthAgo() {
 
   return `${year}-${month}-${day}`;
 }
-
+const HBstyles = StyleSheet.create({
+  button: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 const styles = StyleSheet.create({
   container: {
     flex: 1,

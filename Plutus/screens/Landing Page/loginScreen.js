@@ -31,7 +31,9 @@ localStorage.setItem('password', password)
       }       
       else {
         setSuccessText("💥💥INVALID USER PLEASE REENTER CREDENTIALS💥💥");
+        setTimeout(() => {setSuccessText("Please enter your login information below:")}, 3000)
       } 
+
     })
     .catch(error => {
       console.error(error);

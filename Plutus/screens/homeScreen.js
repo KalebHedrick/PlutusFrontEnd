@@ -63,6 +63,15 @@ export const HomeScreen = ({ navigation }) => {
           >
             <Text style={styles.textStyle}>Settings</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={{ ...styles.openButton, backgroundColor: '#000103' }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              navigation.navigate('Login');
+            }}
+          >
+            <Text style={styles.textStyle}>Logout</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </View>

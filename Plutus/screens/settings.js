@@ -5,11 +5,11 @@ let userPassword = localStorage.getItem('password');
 const SettingsScreen = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-
+const [password, setPassword] = useState('');
 
   const deleteAccount = async () => {
+    if (password == userPassword) {
      try {
-      alert("Account Deleted")
        const response = await fetch('http://3.17.169.64:3000/auth/delete', {
          method: 'DELETE',
         headers: {
@@ -22,19 +22,16 @@ const SettingsScreen = ({navigation}) => {
   }),
        }).then(res => {res.json})
        .then(res => {
-        if (res.status == "delete_account_success") {
-        alert("Your account has been deleted");
-        navigation.navigate("Login");
-        }
-        else {
-          alert("error deleting account");
-        }
+       navigation.navigate("Login");
        });
        // Handle the response
      } catch (error) {
        console.error('Error deleting account:', error);
      }
-    
+    }
+    else {
+      alert("Password does not match")
+    }
   };
 
   const handleUpdateUserInfo =  () => {
@@ -57,7 +54,16 @@ const SettingsScreen = ({navigation}) => {
 
   return (
     <View style = {{flexDirection:"column", justifyContent: "space-evenly", flex: 1, backgroundColor: "#69DC9E"}}>
+        <TouchableOpacity style={HBstyles.button} onPress={() => {navigation.navigate("Home")}}>
+      <Text style={HBstyles.buttonText}>Go to {"Home"}</Text>
+    </TouchableOpacity>
       <Text style={{fontSize: 40}}>Delete Account</Text>
+      <TextInput
+        placeholder="ENTER PASSWORD FOR ACCOUNT DELETION"
+        value={password}
+        onChangeText={setPassword}
+        style={{height: 60, fontSize:30, backgroundColor: "white"}}
+      />
       <TouchableOpacity style={styles.addButton} onPress={() => {deleteAccount()}}>
             <Text style={styles.addButtonText}>DELETE ACCOUNT</Text>
           </TouchableOpacity>
@@ -83,6 +89,20 @@ const SettingsScreen = ({navigation}) => {
 };
 
 export default SettingsScreen;
+const HBstyles = StyleSheet.create({
+  button: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 const styles = StyleSheet.create({
   container: {
     flex: 1,
