@@ -11,8 +11,7 @@ const Login = ({ navigation }) => {
 //post for login info
     console.log('Email:', email);
     console.log('Password:', password);
-localStorage.setItem('email', email)
-localStorage.setItem('password', password)
+
     fetch(LoginUrl, {
   method: 'POST',
   headers: {
@@ -27,6 +26,8 @@ localStorage.setItem('password', password)
     .then(json => {
       console.log(json);
       if (json.status == "auth_success") {
+        localStorage.setItem('email', email)
+        localStorage.setItem('password', password)  
         navigation.navigate('Home');
       }       
       else {

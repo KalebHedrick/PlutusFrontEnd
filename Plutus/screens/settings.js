@@ -8,6 +8,8 @@ const SettingsScreen = ({navigation}) => {
 const [password, setPassword] = useState('');
 
   const deleteAccount = async () => {
+     userEmail = localStorage.getItem('email');
+ userPassword = localStorage.getItem('password');
     if (password == userPassword) {
      try {
        const response = await fetch('http://3.17.169.64:3000/auth/delete', {
